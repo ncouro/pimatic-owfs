@@ -1,0 +1,36 @@
+{
+  "name": "pimatic-owfs",
+  "description": "pimatic plugin to interface with the One-Wire File System driver (OWFS).",
+  "author": "Nic Couronneau",
+  "main": "owfs",
+  "files": [
+    "owfs.coffee",
+    "README.md",
+    "owfs-config-schema.coffee",
+    "device-config-schema.coffee",
+    "icon.svg"
+  ],
+  "version": "0.1.0",
+  "homepage": "http://github.com/nic356/pimatic-owfs",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/nic356/pimatic-owfs.git"
+  },
+  "configSchema": "owfs-config-schema.coffee",
+  "icon": "icon.svg",
+  "keywords": [
+    "pimatic",
+    "devices",
+    "owfs"
+  ],
+  "dependencies": {
+    "owfs": "git+https://https://github.com/benediktarnold/owfs#master"
+  },
+  "peerDependencies": {
+    "pimatic": "0.8.*"
+  },
+  "engines": {
+    "node": ">0.8.x",
+    "npm": ">1.1.x"
+  }
+}
