@@ -1,59 +1,43 @@
-pimatic-sysinfo
+pimatic-owfs
 ===============
 
-pimatic plugin for displaying cpu, memory usage and temperature of the raspberry pi.
+pimatic plugin to interface with the 1-Wire File System (OWFS).
+
+You will need to have installed [OWFS](owfs.org). On a Raspberry Pi running the Raspbian distribution, OWFS can be installed using:
+```bash
+sudo apt-get install owfs ow-shell
+```
+
+You then need to start `owserver`, the OWFS server. The configuration of `owserver` depends on your 1-wire bus master device, check the [documentation](http://owfs.org/index.php?page=owserver) relevant to your device. 
+
+You can list the 1-wire devices detected on the bus by running `owdir`.  
+
 
 ### Supported values:
 
-* CPU usage: `"cpu"`
-* Memory usage: `"memory"`
-* Disk usage: `"diskusage"`
-* RPI System temperature: `"temperature"`
-* pimatic sqlite database size: `"dbsize"`
+* `"sensorPath"`: OWFS path to the 1-wire sensor.
+* `"name"`: sensor name.
+* `"unit"`: measurement unit.
 
-```
-{ 
-  "plugin": "sysinfo"
-}
-```
-
-### Examples:
+### Example:
 
 ```json
+"plugins": [
+  { 
+    "plugin": "owfs"
+  }
+],
+"devices": [
 {
-  "class": "SystemSensor",
-  "id": "syssensor",
-  "name": "System",
+  "class": "OwfsSensor",
+  "id": "my-onewire-sensor",
+  "name": "One-wire sensors",
   "attributes": [
     {
-      "name": "cpu"
-    },
-    {
-      "name": "memory"
-    },
-    {
-      "name": "diskusage",
-      "path": "/"
+      "name": "Temperature 1",
+      "sensorPath": "/10.2F8B71020800/temperature",
+      "unit": "°C"
     }
   ]
 }
 ```
-
-
-```json
-{
-  "class": "SystemSensor",
-  "id": "syssensor",
-  "name": "System Temp.",
-  "attributes": [
-    {
-      "name": "temperature",
-      "interval": 5000
-    }
-  ]
-}
-```
-
-### Credits
-
-<div>Icon made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> is licensed under <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a></div>
