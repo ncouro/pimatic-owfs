@@ -38,7 +38,7 @@ module.exports = (env) ->
           unit = attr.unit
 
           @attributes[name] = {
-            description: name
+            description: "One-wire sensor for #{name}"
             type: "number"
             unit: unit
           }
@@ -47,13 +47,8 @@ module.exports = (env) ->
           getter = (=>
             # TODO do we need to catch exceptions here?
             return @owfsConnection.readAsync( sensorPath ).then( (res) =>
-              return res
+              return Number(res)
             )
-            #value = 0
-            #@owfsConnection.read( sensorPath, (res) =>
-            #    value = res
-            #)
-            #Promise.resolve(value)
           )
 
           # Call base class function to generate a getter with the adequate name
